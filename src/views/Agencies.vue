@@ -1,32 +1,39 @@
 <template>
 <div>
   hey guys
-  <Flex-Display :items="array"/>
+  <Flex-Display :cards="agencyData"/>
 </div>
 </template>
 
 <script>
 import FlexDisplay from '../components/FlexDisplay'
+import axios from 'axios'
+
 export default {
   name: 'Home',
   components:{
     FlexDisplay
   },
+  created: async function(){
+      const {data} = await axios.get('http://localhost:3001/agencies')
+      for(const agency in data){
+        this.agencyData.items.push({
+          query:{agency:agency},
+          name:data[agency].name
+        })
+        console.log(agency, data[agency]);
+      }
+  },
   data: function(){
     return {
-      array:{
-        path:'/date',
+      agencyData:{
+        route:'/date',
         items:[
-          {
-            query:{
-              a:1,
-              b:2
-            },
-            name:"Item"
-          }
         ]
       }
     }
+  },
+  methods:{
   }
 }
 </script>
