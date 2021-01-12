@@ -36,11 +36,11 @@ const routes = [
     name: 'Destinations',
     component: Destinations
   },
-  // {
-  //   path: '/timetable',
-  //   name: 'Timetable',
-  //   component: Timetable
-  // },
+  {
+    path: '/timetable',
+    name: 'Timetable',
+    component: Timetable
+  },
   // {
   //   path: '/about',
   //   name: 'About',
