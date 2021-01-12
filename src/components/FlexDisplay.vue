@@ -1,6 +1,5 @@
 <template>
   <b-container>
-      hi mom
       <b-row>
           <b-col v-for="item in cards.items" :key="item.name" lg=2 md=3 sm=6 xs=12>
               <router-link :to="{ path: cards.route, query: item.query}">
