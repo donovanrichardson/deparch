@@ -1,6 +1,6 @@
 <template>
 <div>
-    {{$route.query}}
+    <h1>Choose Date</h1>
     <b-container>
         <b-row class='justify-content-center'>
             <b-calendar v-model="calendarDate"/>

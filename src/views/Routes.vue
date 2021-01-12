@@ -1,5 +1,8 @@
 <template>
+<div>
+    <h1>Choose Route</h1>
   <Flex-Display :cards="routeData"/>
+</div>
 </template>
 
 <script>
@@ -15,7 +18,7 @@ created: async function(){
     const url = `http://localhost:3001/routes?agency=${dquery.agency}&date=${dquery.date}`;
     const {data} = await axios.get(url)
     this.routeData.items = data.map(r =>{
-        return { query:{...dquery, route:r.route_id}, name:r.name, color:r.route_text_color, bgcolor:r.route_color }
+        return { query:{...dquery, route:r.route_id}, name:r.name, color:r.route_text_color, bgcolor:r.route_color, id:r.route_id }
     })
     console.log(url);
 

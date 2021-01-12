@@ -1,6 +1,6 @@
 <template>
 <div>
-  hey guys
+  <h1>Choose Agency</h1>
   <Flex-Display :cards="agencyData"/>
 </div>
 </template>
@@ -16,12 +16,15 @@ export default {
   },
   created: async function(){
       const {data} = await axios.get('http://localhost:3001/agencies')
+      let idx = 0;
       for(const agency in data){
         this.agencyData.items.push({
           query:{agency:agency},
-          name:data[agency].name
+          name:data[agency].name,
+          id:idx
         })
         console.log(agency, data[agency]);
+        idx++;
       }
   },
   data: function(){

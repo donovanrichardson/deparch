@@ -1,5 +1,8 @@
 <template>
+<div>
+    <h1>Choose Origin</h1>
     <Flex-Display :cards="originData"/>
+</div>
 </template>
 
 <script>
@@ -15,7 +18,7 @@ created: async function(){
     const url = `http://localhost:3001/origins?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}`;
     const {data} = await axios.get(url)
     this.originData.items = data.map(o =>{
-        return { query:{...dquery, origin:o.stop_id}, name:o.stop_name}
+        return { query:{...dquery, origin:o.stop_id}, name:o.stop_name, id:o.stop_id}
     })
     console.log(url);
 
