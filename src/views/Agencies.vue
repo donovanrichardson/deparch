@@ -1,5 +1,8 @@
 <template>
+<div>
+  hey guys
   <Flex-Display :items="array"/>
+</div>
 </template>
 
 <script>
@@ -11,7 +14,18 @@ export default {
   },
   data: function(){
     return {
-      array:[1,2,3,4,5,6,7,8,9,0]
+      array:{
+        path:'/date',
+        items:[
+          {
+            query:{
+              a:1,
+              b:2
+            },
+            name:"Item"
+          }
+        ]
+      }
     }
   }
 }
