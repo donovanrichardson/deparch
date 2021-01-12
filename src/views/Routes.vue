@@ -1,10 +1,34 @@
 <template>
-  
+  <Flex-Display :cards="routeData"/>
 </template>
 
 <script>
+import FlexDisplay from '../components/FlexDisplay'
+import axios from 'axios'
 export default {
-// import FlexDisplay from '../components/FlexDisplay'
+name:'Routes',
+components:{
+    FlexDisplay
+},
+created: async function(){
+    const dquery = this.$route.query
+    const url = `http://localhost:3001/routes?agency=${dquery.agency}&date=${dquery.date}`;
+    const {data} = await axios.get(url)
+    this.routeData.items = data.map(r =>{
+        return { query:{...dquery, route:r.route_id}, name:r.name, color:r.route_text_color, bgcolor:r.route_color }
+    })
+    console.log(url);
+
+      
+},
+data: function(){
+    return{
+        routeData:{
+            route:'origins',
+            items:[]
+        }
+    }
+}
 }
 </script>
 

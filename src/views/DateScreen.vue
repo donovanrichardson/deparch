@@ -7,7 +7,7 @@
             <!-- <input type="date" name="" id="" :value="startDate"> -->
         </b-row>
         <b-row class='justify-content-center'>
-            <router-link :to='{ path: "/routes", query: {...this.$route.query, date:chosenDate}}'>hi</router-link> 
+            <router-link :to='{ path: "/routes", query: {...this.$route.query, date:chosenDate}}'>Submit</router-link> 
         </b-row>
     </b-container>
 </div>

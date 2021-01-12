@@ -6,6 +6,7 @@ import DateScreen from '../views/DateScreen.vue'
 import Routes from '../views/Routes.vue'
 import Origins from '../views/Origins.vue'
 import Destinations from '../views/Origins.vue'
+import Timetable from '../views/Timetable.vue'
 
 Vue.use(VueRouter)
 
@@ -20,21 +21,21 @@ const routes = [
     name: 'Date',
     component: DateScreen
   },
-  // {
-  //   path: '/routes',
-  //   name: 'Routes',
-  //   component: Routes
-  // },
-  // {
-  //   path: '/origins',
-  //   name: 'Origins',
-  //   component: Origins
-  // },
-  // {
-  //   path: '/destinations',
-  //   name: 'Destinations',
-  //   component: Destinations
-  // },
+  {
+    path: '/routes',
+    name: 'Routes',
+    component: Routes
+  },
+  {
+    path: '/origins',
+    name: 'Origins',
+    component: Origins
+  },
+  {
+    path: '/destinations',
+    name: 'Destinations',
+    component: Destinations
+  },
   // {
   //   path: '/timetable',
   //   name: 'Timetable',
