@@ -3,10 +3,11 @@
     {{$route.query}}
     <b-container>
         <b-row class='justify-content-center'>
-            <input type="date" name="" id="" :value="startDate">
+            <b-calendar v-model="calendarDate"/>
+            <!-- <input type="date" name="" id="" :value="startDate"> -->
         </b-row>
         <b-row class='justify-content-center'>
-            <!-- <router-link to='/agencies'></router-link> this isnt working--> 
+            <router-link :to='{ path: "/routes", query: {...this.$route.query, date:chosenDate}}'>hi</router-link> 
         </b-row>
     </b-container>
 </div>
@@ -30,7 +31,7 @@ export default {
     computed:{
         chosenDate(){
             if(this.calendarDate){
-                return this.calendarDate.replace('-','')
+                return this.calendarDate.replace(/-/g,'')
             }
         }
     }
