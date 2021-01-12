@@ -5,7 +5,7 @@ import Agencies from '../views/Agencies.vue'
 import DateScreen from '../views/DateScreen.vue'
 import Routes from '../views/Routes.vue'
 import Origins from '../views/Origins.vue'
-import Destinations from '../views/Origins.vue'
+import Destinations from '../views/Destinations.vue'
 import Timetable from '../views/Timetable.vue'
 
 Vue.use(VueRouter)
