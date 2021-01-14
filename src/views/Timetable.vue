@@ -1,8 +1,18 @@
 <template>
 <div>
-    <p v-for="hour in timetable" :key="hour[0]">
-        {{hour}}
-    </p>
+    <h2>
+        {{routeName}} {{fromTo}}
+    </h2>
+    <b-container>
+        <b-row v-for="hour in timetable" :key="hour[0]" align-h="start">
+            <b-col cols="2" class="hour">
+                {{formatHour(hour[0], hr12)}}
+            </b-col>
+            <b-col v-for="minute in hour[1]" :key="`${hour[0]}:${minute}`" cols="1">
+                {{minute}}
+            </b-col>
+        </b-row>
+    </b-container>
 </div>
 </template>
 
@@ -12,9 +22,7 @@ import {
     DateTime
 } from 'luxon'
 
-function twelveHour(theHour){
-    return DateTime.utc().startOf('day').plus({hour:theHour}).toFormat('ha')
-}
+
 
 let timetable = []
 
@@ -29,6 +37,7 @@ export default {
         const {
             data
         } = await axios.get(url)
+        this.data=data;
         const times = data.map(t => {
             return t.departure_time.split(':').slice(0, 2)
             // return DateTime.fromFormat(t.departure_time, "hh:mm:ss", {zone:"UTC"}).toString()
@@ -44,22 +53,34 @@ export default {
             times: [],
             min:null,
             max:null,
-            hr12:false,
+            hr12:true,
+            data:null
         }
     },
+    methods:{
+        formatHour(theHour, twelve){
+    if(twelve){
+        return DateTime.utc().startOf('day').plus({hour:theHour}).toFormat('ha')
+    }else{
+        return theHour
+    }
+
+}
+    },
     computed: {
-        // times(){
-        //     if(data){
-        //         return data.map(t=>{
-        //             return t.departure_time.split(':').slice(0,2)
-        //             // return DateTime.fromFormat(t.departure_time, "hh:mm:ss", {zone:"UTC"}).toString()
-        //         })
-        //     }
-        // }
+        routeName(){
+            return data[0].route_short_name || data[0].route_long_name
+        },
+        fromTo(){
+            return `Departures From ${data[0].oriname} To ${data[0].destname}`
+        }
     }
 }
 </script>
 
 <style>
+.hour{
+    font-weight:bold;
+}
 
 </style>
