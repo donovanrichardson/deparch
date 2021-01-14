@@ -1,5 +1,9 @@
 <template>
 <div>
+        <div id="nav">
+      <router-link to="/">Agencies</router-link> |
+      <router-link :to="{path:'/date', query:$route.query}">Choose Date</router-link>
+    </div>
     <h1>Choose Route</h1>
   <Flex-Display :cards="routeData"/>
 </div>

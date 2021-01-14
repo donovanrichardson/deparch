@@ -1,5 +1,8 @@
 <template>
 <div>
+        <div id="nav">
+      <router-link to="/">Go Back To Agencies</router-link> 
+    </div>
     <h1>Choose Date</h1>
     <b-container>
         <b-row class='justify-content-center'>

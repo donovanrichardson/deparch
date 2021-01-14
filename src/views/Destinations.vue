@@ -1,5 +1,11 @@
 <template>
 <div>
+    <div id="nav">
+        <router-link to="/">Agencies</router-link> |
+        <router-link :to="{path:'/date', query:$route.query}"> Date</router-link> |
+        <router-link :to="{path:'/routes', query:$route.query}">Route</router-link> |
+        <router-link :to="{path:'/origins', query:$route.query}">Origin</router-link>
+    </div>
     <h1>Choose Destination</h1>
     <Flex-Display :cards="destData"/>
 </div>

@@ -1,5 +1,12 @@
 <template>
 <div>
+    <div id="nav">
+        <router-link to="/">Agencies</router-link> |
+        <router-link :to="{path:'/date', query:$route.query}"> Date</router-link> |
+        <router-link :to="{path:'/routes', query:$route.query}">Route</router-link> |
+        <router-link :to="{path:'/origins', query:$route.query}">Origin</router-link> |
+        <router-link :to="{path:'/destinations', query:$route.query}">Destination</router-link>
+    </div>
     <b-container>
     <h4>
         {{routeName}}
@@ -88,5 +95,6 @@ export default {
 <style>
 .hour {
     font-weight: bold;
+    margin-right:.5em;
 }
 </style>
