@@ -1,9 +1,12 @@
 <template>
 <div>
-    <h2>
-        {{routeName}} {{fromTo}}
-    </h2>
     <b-container>
+    <h4>
+        {{routeName}}
+    </h4>
+    <h4>
+        {{fromTo}}
+    </h4>
         <b-row v-for="hour in timetable" :key="hour[0]" align-h="start">
             <b-col cols="2" class="hour">
                 {{formatHour(hour[0], hr12)}}
@@ -22,10 +25,7 @@ import {
     DateTime
 } from 'luxon'
 
-
-
 let timetable = []
-
 
 export default {
     // import FlexDisplay from '../components/FlexDisplay'
@@ -37,50 +37,56 @@ export default {
         const {
             data
         } = await axios.get(url)
-        this.data=data;
+        this.data = data;
         const times = data.map(t => {
             return t.departure_time.split(':').slice(0, 2)
             // return DateTime.fromFormat(t.departure_time, "hh:mm:ss", {zone:"UTC"}).toString()
         })
 
-        for(let num = Math.min(...times.map(t=>t[0])); num < Math.max(...times.map(t=>t[0])); num++){
-    this.timetable.push([num, times.filter(trips => trips[0] == num).map(t2=>t2[1])])
-}
+        for (let num = Math.min(...times.map(t => t[0])); num < Math.max(...times.map(t => t[0])); num++) {
+            this.timetable.push([num, times.filter(trips => trips[0] == num).map(t2 => t2[1])])
+        }
+        this.routeName = this.data[0].route_short_name || this.data[0].route_long_name
+        this.fromTo = `Departures From ${this.data[0].oriname} To ${this.data[0].destname}`
+
     },
     data() {
         return {
             timetable: [],
             times: [],
-            min:null,
-            max:null,
-            hr12:true,
-            data:null
+            min: null,
+            max: null,
+            hr12: true,
+            data: null,
+            routeName: null,
+            fromTo: null,
         }
     },
-    methods:{
-        formatHour(theHour, twelve){
-    if(twelve){
-        return DateTime.utc().startOf('day').plus({hour:theHour}).toFormat('ha')
-    }else{
-        return theHour
-    }
+    methods: {
+        formatHour(theHour, twelve) {
+            if (twelve) {
+                return DateTime.utc().startOf('day').plus({
+                    hour: theHour
+                }).toFormat('ha')
+            } else {
+                return theHour
+            }
 
-}
+        }
     },
     computed: {
-        routeName(){
-            return data[0].route_short_name || data[0].route_long_name
-        },
-        fromTo(){
-            return `Departures From ${data[0].oriname} To ${data[0].destname}`
+        //     routeName(){
+        //         return this.data[0].route_short_name || this.data[0].route_long_name
+        //     },
+        //     fromTo(){
+        //         return `Departures From ${this.data[0].oriname} To ${this.data[0].destname}`
+        //     }
         }
     }
-}
 </script>
 
 <style>
-.hour{
-    font-weight:bold;
+.hour {
+    font-weight: bold;
 }
-
 </style>
