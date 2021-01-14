@@ -1,7 +1,7 @@
 <template>
 <div>
-    <p v-for="time in times" :key="time">
-        {{time}}
+    <p v-for="hour in timetable" :key="hour[0]">
+        {{hour}}
     </p>
 </div>
 </template>
@@ -16,6 +16,9 @@ function twelveHour(theHour){
     return DateTime.utc().startOf('day').plus({hour:theHour}).toFormat('ha')
 }
 
+let timetable = []
+
+
 export default {
     // import FlexDisplay from '../components/FlexDisplay'
     name: "Timetable",
@@ -26,15 +29,18 @@ export default {
         const {
             data
         } = await axios.get(url)
-        this.timetable = data
-        this.times = this.timetable.map(t => {
+        const times = data.map(t => {
             return t.departure_time.split(':').slice(0, 2)
             // return DateTime.fromFormat(t.departure_time, "hh:mm:ss", {zone:"UTC"}).toString()
         })
+
+        for(let num = Math.min(...times.map(t=>t[0])); num < Math.max(...times.map(t=>t[0])); num++){
+    this.timetable.push([num, times.filter(trips => trips[0] == num).map(t2=>t2[1])])
+}
     },
     data() {
         return {
-            timetable: null,
+            timetable: [],
             times: [],
             min:null,
             max:null,
@@ -43,8 +49,8 @@ export default {
     },
     computed: {
         // times(){
-        //     if(this.timetable){
-        //         return this.timetable.map(t=>{
+        //     if(data){
+        //         return data.map(t=>{
         //             return t.departure_time.split(':').slice(0,2)
         //             // return DateTime.fromFormat(t.departure_time, "hh:mm:ss", {zone:"UTC"}).toString()
         //         })
