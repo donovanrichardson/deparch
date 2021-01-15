@@ -17,15 +17,25 @@ export default {
   created: async function(){
       const {data} = await axios.get('http://localhost:3001/agencies')
       let idx = 0;
-      for(const agency in data){
+      // console.log(data);
+      data.forEach(d=>{
+        console.log("data", idx, d);
         this.agencyData.items.push({
-          query:{agency:agency},
-          name:data[agency].name,
+          query:{agency:d.key},
+          name:d.name,
           id:idx
         })
-        console.log(agency, data[agency]);
-        idx++;
-      }
+        idx ++
+      })
+      // for(const agency in data){
+      //   this.agencyData.items.push({
+      //     query:{agency:agency},
+      //     name:data[agency].name,
+      //     id:idx
+      //   })
+      //   console.log(agency, data[agency]);
+      //   idx++;
+      // }
   },
   data: function(){
     return {

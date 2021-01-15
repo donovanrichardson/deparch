@@ -8,6 +8,9 @@
         <router-link :to="{path:'/destinations', query:$route.query}">Destination</router-link>
     </div>
     <b-container>
+        <h5>
+            {{date}}
+        </h5>
     <h4>
         {{routeName}}
     </h4>
@@ -88,6 +91,9 @@ export default {
         //     fromTo(){
         //         return `Departures From ${this.data[0].oriname} To ${this.data[0].destname}`
         //     }
+        date(){
+            return DateTime.fromFormat(this.$route.query.date,'yyyyMMdd').toLocaleString(DateTime.DATE_HUGE)
+        }
         }
     }
 </script>
