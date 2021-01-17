@@ -8,6 +8,7 @@
 <script>
 import FlexDisplay from '../components/FlexDisplay'
 import axios from 'axios'
+import {api} from '../config'
 
 export default {
   name: 'Home',
@@ -15,7 +16,7 @@ export default {
     FlexDisplay
   },
   created: async function(){
-      const {data} = await axios.get('http://localhost:3001/agencies')
+      const {data} = await axios.get(`${api}/agencies`)
       let idx = 0;
       // console.log(data);
       data.forEach(d=>{

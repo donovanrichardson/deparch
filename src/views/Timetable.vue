@@ -34,6 +34,7 @@ import axios from 'axios'
 import {
     DateTime
 } from 'luxon'
+import {api} from '../config'
 
 let timetable = []
 
@@ -43,7 +44,7 @@ export default {
     created: async function () {
         const dquery = this.$route.query
         // { "agency": "boston", "date": "20201206", "route": "1", "origin": "64", "dest": "110" } 
-        const url = `http://localhost:3001/timetable?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}&origin=${dquery.origin}&dest=${dquery.dest}`
+        const url = `${api}/timetable?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}&origin=${dquery.origin}&dest=${dquery.dest}`
         const {
             data
         } = await axios.get(url)

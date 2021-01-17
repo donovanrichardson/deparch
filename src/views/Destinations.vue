@@ -14,6 +14,8 @@
 <script>
 import FlexDisplay from '../components/FlexDisplay'
 import axios from 'axios'
+import {api} from '../config'
+
 export default {
 name:'Destinations',
 components:{
@@ -22,7 +24,7 @@ components:{
 created: async function(){
     const dquery = this.$route.query
     console.log(dquery);
-    const url = `http://localhost:3001/dests?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}&origin=${dquery.origin}`;
+    const url = `${api}/dests?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}&origin=${dquery.origin}`;
     const {data} = await axios.get(url)
     this.destData.items = data.map(d =>{
         return { query:{...dquery, dest:d.stop_id}, name:d.stop_name, id:d.stop_id}

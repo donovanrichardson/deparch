@@ -13,6 +13,7 @@
 <script>
 import FlexDisplay from '../components/FlexDisplay'
 import axios from 'axios'
+import {api} from '../config'
 export default {
     name: 'Origins',
     components: {
@@ -20,7 +21,7 @@ export default {
     },
     created: async function () {
         const dquery = this.$route.query
-        const url = `http://localhost:3001/origins?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}`;
+        const url = `${api}/origins?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}`;
         const {
             data
         } = await axios.get(url)
