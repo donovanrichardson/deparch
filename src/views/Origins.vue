@@ -20,7 +20,7 @@ export default {
     },
     created: async function () {
         const dquery = this.$route.query
-        const url = `http://localhost:3001/origins?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}`;
+        const url = `http://localhost:3001/origins?agency=${escape(dquery.agency)}&date=${dquery.date}&route=${escape(dquery.route)}`;
         const {
             data
         } = await axios.get(url)

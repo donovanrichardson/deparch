@@ -23,9 +23,9 @@ export default {
     name: 'DateScreen',
     created: async function(){
         const dquery = this.$route.query
-        const url = `http://localhost:3001/timezone?agency=${dquery.agency}`
+        const url = `http://localhost:3001/timezone?agency=${escape(dquery.agency)}`
         console.log('why no work', url);
-        const {data} = await axios.get(`http://localhost:3001/timezone?agency=${dquery.agency}`)
+        const {data} = await axios.get(url)
         this.calendarDate = DateTime.fromObject({zone:data[0].agecny_timezone}).toFormat("yyyy-MM-dd")
         console.log(DateTime, this.calendarDate);
     },
