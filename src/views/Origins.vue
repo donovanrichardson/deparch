@@ -29,10 +29,10 @@ export default {
             return {
                 query: {
                     ...dquery,
-                    origin: o.stop_id
+                    origin: o.stop_name
                 },
                 name: o.stop_name,
-                id: o.stop_id
+                id: o.stop_name
             }
         })
         console.log(url);
