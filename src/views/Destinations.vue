@@ -24,7 +24,7 @@ components:{
 created: async function(){
     const dquery = this.$route.query
     console.log(dquery);
-    const url = `${api}/dests?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}&origin=${dquery.origin}`;
+    const url = `${api}/dests?agency=${escape(dquery.agency)}&date=${dquery.date}&route=${escape(dquery.route)}&origin=${escape(dquery.origin)}`;
     const {data} = await axios.get(url)
     this.destData.items = data.map(d =>{
         return { query:{...dquery, dest:d.stop_name}, name:d.stop_name, id:d.stop_name}

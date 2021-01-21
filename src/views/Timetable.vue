@@ -44,7 +44,7 @@ export default {
     created: async function () {
         const dquery = this.$route.query
         // { "agency": "boston", "date": "20201206", "route": "1", "origin": "64", "dest": "110" } 
-        const url = `${api}/timetable?agency=${dquery.agency}&date=${dquery.date}&route=${dquery.route}&origin=${dquery.origin}&dest=${dquery.dest}`
+        const url = `${api}/timetable?agency=${escape(dquery.agency)}&date=${dquery.date}&route=${escape(dquery.route)}&origin=${escape(dquery.origin)}&dest=${escape(dquery.dest)}`
         const {
             data
         } = await axios.get(url)
